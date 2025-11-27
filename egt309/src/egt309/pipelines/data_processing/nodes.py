@@ -22,7 +22,14 @@ def clean_dataset(df: pd.DataFrame) -> pd.DataFrame:
     df['Contact Method'] = df['Contact Method'].replace('Telephone', 'telephone')
 
     # Remove unrealistic '150 years' age entries
-    df = df.drop(df[df['Age'] == '150 years'].index)
+    df['Age'] = (
+        df['Age']
+            .astype(str)
+            .str.replace(' years', '')
+            .astype(int)
+    )
+    df = df.drop(df[df['Age'] == 150].index)
+
 
     # Corrects negative entries in 'Campaign Calls'
     df['Campaign Calls'] = df['Campaign Calls'].astype(str)
