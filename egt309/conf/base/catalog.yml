@@ -2,6 +2,8 @@
 #
 # Documentation for this file format can be found in "The Data Catalog"
 # Link: https://docs.kedro.org/en/stable/data/data_catalog.html
-subscribe:
+
+
+raw_df:
+  filepath: data/01_raw/bmarket.csv
   type: pandas.CSVDataset
-  filepath: data/
