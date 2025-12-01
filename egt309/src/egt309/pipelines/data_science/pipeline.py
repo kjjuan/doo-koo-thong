@@ -3,22 +3,35 @@ This is a boilerplate pipeline 'data_science'
 generated using Kedro 1.0.0
 """
 
-from kedro.pipeline import node, pipeline  # noqa
+from kedro.pipeline import Pipeline, node
 
+from .nodes import *
 
-def create_pipeline(**kwargs) -> pipeline:
-    return pipeline(
+def create_pipeline(**kwargs) -> Pipeline:
+    return Pipeline(
         [
             node(
-                func=split_data,
-                inputs= ["subscribe", "params:insert here"],
-                outputs=["X_train", "X_test", "y_train", "y_test"],
-                name="split_data_node",
+                func=train_models,
+                inputs=[
+                    "X_train",
+                    "y_train",
+                    "preprocessor",
+                    "params:model_hyperparameters"
+                ],
+                outputs="trained_models",
+                name="train_models_node"
             ),
             node(
-                func=train_model,
-                inputs=["X_train", "X_test", "y_train", "y_test"],
-                outputs= "model"
+                func=evaluate_models,
+                inputs=[
+                    "trained_models",
+                    "X_test",
+                    "y_test",
+                    "params:evaluation_thresholds"
+                ],
+                outputs="model_evaluation_metrics",
+                name="evaluate_models_node"
             )
-        ]
-)
+        ],
+        tags="model_train"
+    )

@@ -1,0 +1,43 @@
+# conf/base/parameters.yml
+
+data_split_options:
+  test_size: 0.2
+  random_state: 42
+
+features:
+  categorical:
+    - Occupation
+    - Marital Status
+    - Education Level
+    - Credit Default
+    - Housing Loan
+    - Personal Loan
+    - Contact Method
+  numeric:
+    - Age
+    - Campaign Calls
+    - PreviouslyContacted
+    - WasContactedBefore
+
+model_hyperparameters:
+  logreg:
+    max_iter: 500
+    class_weight: balanced
+  random_forest:
+    n_estimators: 300
+    max_depth: 12
+    min_samples_split: 5
+    class_weight: balanced
+  gradient_boosting:
+    learning_rate: 0.05
+    n_estimators: 300
+    max_depth: 3
+  xgboost:
+    n_estimators: 500
+    learning_rate: 0.03
+    max_depth: 5
+    subsample: 0.8
+    colsample_bytree: 0.8
+    eval_metric: logloss
+
+evaluation_thresholds: [0.7, 0.5, 0.3, 0.1]
