@@ -7,7 +7,7 @@
 # Note: The raw data node should include the minimal cleaning needed for the raw data.
 raw_df:
   filepath: data/01_raw/bmarket.csv
-  type: pandas.CSVDataSet
+  type: pandas.CSVDataet
 
 # cleaned and feature-engineered dataframe
 # Output of the initial cleaning node

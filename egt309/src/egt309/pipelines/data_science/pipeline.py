@@ -33,5 +33,4 @@ def create_pipeline(**kwargs) -> Pipeline:
                 name="evaluate_models_node"
             )
         ],
-        tags="model_train"
     )
