@@ -21,46 +21,46 @@ df_prep:
   filepath: "data/04_feature/df_prep.csv"
   type: pandas.CSVDataset
 
-# --- Unprocessed Split Data (Used as Input to ImbPipeline) ---
+# Unprocessed Split Data (Used as Input to ImbPipeline)
 X_train:
-  type: pandas.CSVDataset
   filepath: "data/04_feature/X_train.csv"
+  type: pandas.CSVDataset
 
 X_test:
-  type: pandas.CSVDataset
   filepath: "data/04_feature/X_test.csv"
+  type: pandas.CSVDataset
 
 y_train_unprocessed: # Renamed to fix duplicate key error
-  type: pandas.CSVDataset
   filepath: "data/04_feature/y_train.csv"
+  type: pandas.CSVDataset
 
 y_test_unprocessed: # Renamed to fix duplicate key error
-  type: pandas.CSVDataset
   filepath: "data/04_feature/y_test.csv"
-
-# --- Processed Split Data (Output of preprocessing node, used for inspection/debugging) ---
-X_train_processed:
   type: pandas.CSVDataset
+
+# Processed Split Data (Output of preprocessing node, used for inspection/debugging) 
+X_train_processed:
   filepath: "data/05_model_input/X_train_processed.csv"
+  type: pandas.CSVDataset
 
 X_test_processed:
-  type: pandas.CSVDataset
   filepath: "data/05_model_input/X_test_processed.csv"
+  type: pandas.CSVDataset
 
-# --- Model/Preprocessor Artifacts ---
+# Model/Preprocessor Artifacts 
 preprocessor:
-  type: pickle.PickleDataset
   filepath: "data/06_models/preprocessor.pkl"
+  type: pickle.PickleDataset
 
 processed_features:
-  type: json.JSONDataset
   filepath: "data/04_feature/processed_features.json"
+  type: json.JSONDataset
 
 trained_models:
-  type: pickle.PickleDataset
   filepath: "data/06_models/trained_models.pkl"
+  type: pickle.PickleDataset
 
-# --- MISSING: Final Evaluation Output ---
+# MISSING: Final Evaluation Output
 model_evaluation_metrics:
+  filepath: "data/08_reporting/model_evaluation_metrics.csv"
   type: pandas.CSVDataset
-  filepath: "data/07_reporting/model_evaluation_metrics.csv"

@@ -1,0 +1,11 @@
+#Ignore all files in data except for 01_raw
+data/02_intermediate
+data/03_primary
+data/04_feature
+data/05__model_input
+data/06_models
+data/07_model_output
+data/08_reporting
+
+#Ignore local logs
+src/egt309/__pycache__
