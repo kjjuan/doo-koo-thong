@@ -10,7 +10,6 @@ features:
     - Marital Status
     - Education Level
     - Credit Default
-    - Housing Loan
     - Personal Loan
     - Contact Method
   numeric:
