@@ -1,50 +1,50 @@
-# Here you can define all your datasets by using simple YAML syntax.
+# Here you can define all your Datasets by using simple YAML syntax.
 #
 # Documentation for this file format can be found in "The Data Catalog"
 # Link: https://docs.kedro.org/en/stable/data/data_catalog.html
 
 # bmarket.db was changed to csv
 # Note: The raw data node should include the minimal cleaning needed for the raw data.
-raw_df:
+df_raw:
   filepath: data/01_raw/bmarket.csv
-  type: pandas.CSVDataSet
+  type: pandas.CSVDataset
 
 # cleaned and feature-engineered dataframe
 # Output of the initial cleaning node
 df_cleaned:
   filepath: data/03_primary/df_cleaned.csv
-  type: pandas.CSVDataSet
+  type: pandas.CSVDataset
 
 # dataset used for splitting and initial processing
 # Output of the feature engineering node
 df_prep:
   filepath: "data/04_feature/df_prep.csv"
-  type: pandas.CSVDataSet
+  type: pandas.CSVDataset
 
 # --- Unprocessed Split Data (Used as Input to ImbPipeline) ---
 X_train:
-  type: pandas.CSVDataSet
+  type: pandas.CSVDataset
   filepath: "data/04_feature/X_train.csv"
 
 X_test:
-  type: pandas.CSVDataSet
+  type: pandas.CSVDataset
   filepath: "data/04_feature/X_test.csv"
 
 y_train_unprocessed: # Renamed to fix duplicate key error
-  type: pandas.CSVDataSet
+  type: pandas.CSVDataset
   filepath: "data/04_feature/y_train.csv"
 
 y_test_unprocessed: # Renamed to fix duplicate key error
-  type: pandas.CSVDataSet
+  type: pandas.CSVDataset
   filepath: "data/04_feature/y_test.csv"
 
 # --- Processed Split Data (Output of preprocessing node, used for inspection/debugging) ---
 X_train_processed:
-  type: pandas.CSVDataSet
+  type: pandas.CSVDataset
   filepath: "data/05_model_input/X_train_processed.csv"
 
 X_test_processed:
-  type: pandas.CSVDataSet
+  type: pandas.CSVDataset
   filepath: "data/05_model_input/X_test_processed.csv"
 
 # --- Model/Preprocessor Artifacts ---
@@ -53,7 +53,7 @@ preprocessor:
   filepath: "data/06_models/preprocessor.pkl"
 
 processed_features:
-  type: json.JSONDataSet
+  type: json.JSONDataset
   filepath: "data/04_feature/processed_features.json"
 
 trained_models:
@@ -62,5 +62,5 @@ trained_models:
 
 # --- MISSING: Final Evaluation Output ---
 model_evaluation_metrics:
-  type: pandas.CSVDataSet
+  type: pandas.CSVDataset
   filepath: "data/07_reporting/model_evaluation_metrics.csv"

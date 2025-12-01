@@ -9,7 +9,9 @@ from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import OneHotEncoder
 
 def clean_and_process(df_raw: pd.DataFrame) -> pd.DataFrame:
-    # Fill null values in loan columns with 'unknown'
+    df_cleaned = df_raw.copy()
+
+    # Fill null values in loan columns with 'unknown' 
     df_cleaned = df_cleaned.fillna({
         'Housing Loan': 'unknown',
         'Personal Loan': 'unknown'
