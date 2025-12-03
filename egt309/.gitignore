@@ -13,18 +13,19 @@ conf/**/*credentials*
 data/**
 
 # except their sub-folders
-!data/**/
+#!data/**/
+
+!data/01_raw/
+!data/01_raw/*
 
 # dont push pickle files
-.pkl
-
-data/02_intermediate/**/
-data/03_primary/**/
-data/04_feature/**/
-data/05_model_input/**/
-data/06_models/**/
-data/07_model_output/**/
-data/08_reporting/**/
+#data/02_intermediate/**/
+#data/03_primary/**/
+#data/04_feature/**/
+#data/05_model_input/**/
+#data/06_models/**/
+#data/07_model_output/**/
+#data/08_reporting/**/
 
 # also keep all .gitkeep files
 !.gitkeep

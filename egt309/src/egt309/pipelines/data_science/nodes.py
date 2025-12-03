@@ -61,6 +61,9 @@ def train_models(X_train: pd.DataFrame, y_train: pd.Series, preprocessor: Column
                     max_depth=model_hyperparameters['xgboost']['max_depth'],
                     subsample=model_hyperparameters['xgboost']['subsample'],
                     colsample_bytree=model_hyperparameters['xgboost']['colsample_bytree'],
+                    gamma=model_hyperparameters['xgboost']['gamma'],
+                    scale_pos_weight=model_hyperparameters['xgboost']['scale_pos_weight'],
+                    reg_lambda=model_hyperparameters['xgboost']['reg_lambda'],
                     eval_metric=model_hyperparameters['xgboost']['eval_metric'],
                     random_state=data_split_options['random_state']
             ))

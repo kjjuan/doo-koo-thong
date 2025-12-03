@@ -32,7 +32,7 @@ def create_pipeline(**kwargs) -> Pipeline:
                 ],
                 outputs="model_evaluation_metrics",
                 name="evaluate_models_node",
-                tags=["model_evaluation"],
+                tags=["model_training"],
             )
         ],
     )

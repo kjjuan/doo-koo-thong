@@ -36,6 +36,11 @@ def clean_and_process(df_raw: pd.DataFrame) -> pd.DataFrame:
     df_cleaned['Campaign Calls'] = df_cleaned['Campaign Calls'].str.replace('-', '', regex=False)   
     df_cleaned['Campaign Calls'] = df_cleaned['Campaign Calls'].astype(int)
 
+    # Changes '999' to '0' days 
+    df_cleaned['WasContactedBefore'] = (df_cleaned['Previous Contact Days'] != 999).astype(int)
+    df_cleaned['PreviouslyContacted'] = df_cleaned['Previous Contact Days'].replace({999: 0})
+    df_cleaned = df_cleaned.drop(columns=['Previous Contact Days'])
+
     return df_cleaned
 
 def engineer_and_prepare(df_cleaned: pd.DataFrame) -> pd.DataFrame:
@@ -49,23 +54,19 @@ def engineer_and_prepare(df_cleaned: pd.DataFrame) -> pd.DataFrame:
     df_prep['Subscription Status'] = df_prep['Subscription Status'].map({'yes': 1, 'no': 0})
 
     # Create Age Group (categorical) from Age
-    bins = [18, 25, 35, 45, 55, 65, 90]
-    labels = ['18-25', '26-35', '36-45', '46-55', '56-65', '66+']
+    bins = [16, 25, 35, 45, 55, 65, 120]
+    labels = ['16-25', '26-35', '36-45', '46-55', '56-65', '66+']
     df_prep['Age Group'] = pd.cut(
         df_prep['Age'],
         bins=bins,
         labels=labels,
-        include_lowest=True,   # include 18 in first bin
+        include_lowest=True,   # include 16 in first bin
         right=True             # upper bound inclusive
     )
 
     # Drop original numeric Age column (since we’re using Age Group instead)
     df_prep = df_prep.drop(columns=['Age'])
     
-    # Feature engineering for 'Previous Contact Days'
-    df_prep['WasContactedBefore'] = (df_prep['Previous Contact Days'] != 999).astype(int)
-    df_prep['PreviouslyContacted'] = df_prep['Previous Contact Days'].replace({999: 0})
-    df_prep = df_prep.drop(columns=['Previous Contact Days'])
 
     return df_prep
 
