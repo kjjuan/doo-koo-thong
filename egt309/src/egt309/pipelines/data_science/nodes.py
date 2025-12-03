@@ -18,48 +18,51 @@ def train_models(X_train: pd.DataFrame, y_train: pd.Series, preprocessor: Column
     NOTE: X_train/y_train here refer to the already split, but not yet encoded, data.
     The ImbPipeline handles the encoding within its first step ('preprocess').
     """
-    
+
+    model_hyperparameters = params['model_hyperparameters']
+    data_split_options = params['data_split_options']
+
     y_train = y_train.iloc[:, 0] # Convert back to Series for SMOTE
     
     models = {
         "LogReg": ImbPipeline(steps=[
             ('preprocess', preprocessor),
             ('model', LogisticRegression(
-                max_iter=params['logreg']['max_iter'],
-                class_weight=params['logreg']['class_weight'],
-                random_state=42
+                max_iter=model_hyperparameters['logreg']['max_iter'],
+                class_weight=model_hyperparameters['logreg']['class_weight'],
+                random_state=data_split_options['random_state']
             ))
         ]),
         "RandomForest": ImbPipeline(steps=[
             ('preprocess', preprocessor),
             ('model', RandomForestClassifier(
-                n_estimators=params['random_forest']['n_estimators'],
-                max_depth=params['random_forest']['max_depth'],
-                min_samples_split=params['random_forest']['min_samples_split'],
-                class_weight=params['random_forest']['class_weight'],
-                random_state=42
+                n_estimators=model_hyperparameters['random_forest']['n_estimators'],
+                max_depth=model_hyperparameters['random_forest']['max_depth'],
+                min_samples_split=model_hyperparameters['random_forest']['min_samples_split'],
+                class_weight=model_hyperparameters['random_forest']['class_weight'],
+                random_state=data_split_options['random_state']
             ))
         ]),
         "GradientBoosting": ImbPipeline(steps=[
             ('preprocess', preprocessor),
             ('model', GradientBoostingClassifier(
-                learning_rate=params['gradient_boosting']['learning_rate'],
-                n_estimators=params['gradient_boosting']['n_estimators'],
-                max_depth=params['gradient_boosting']['max_depth'],
-                random_state=42
+                learning_rate=model_hyperparameters['gradient_boosting']['learning_rate'],
+                n_estimators=model_hyperparameters['gradient_boosting']['n_estimators'],
+                max_depth=model_hyperparameters['gradient_boosting']['max_depth'],
+                random_state=data_split_options['random_state']
             ))
         ]),
 
         "XGBoost": ImbPipeline(steps=[
             ('preprocess', preprocessor),
             ('model', XGBClassifier(
-                    n_estimators=params['xgboost']['n_estimators'],
-                    learning_rate=params['xgboost']['learning_rate'],
-                    max_depth=params['xgboost']['max_depth'],
-                    subsample=params['xgboost']['subsample'],
-                    colsample_bytree=params['xgboost']['colsample_bytree'],
-                    eval_metric=params['xgboost']['eval_metric'],
-                    random_state=42
+                    n_estimators=model_hyperparameters['xgboost']['n_estimators'],
+                    learning_rate=model_hyperparameters['xgboost']['learning_rate'],
+                    max_depth=model_hyperparameters['xgboost']['max_depth'],
+                    subsample=model_hyperparameters['xgboost']['subsample'],
+                    colsample_bytree=model_hyperparameters['xgboost']['colsample_bytree'],
+                    eval_metric=model_hyperparameters['xgboost']['eval_metric'],
+                    random_state=data_split_options['random_state']
             ))
         ])
 

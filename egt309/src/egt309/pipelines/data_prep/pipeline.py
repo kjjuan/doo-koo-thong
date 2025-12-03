@@ -17,21 +17,22 @@ def create_pipeline(**kwargs) -> Pipeline:
                 func=clean_and_process,
                 inputs="df_raw",
                 outputs="df_cleaned",
-                name="clean_and_standardize_data",
-                tags=["data_cleaning"]
+                name="clean_and_process_data", # kedro run --node "clean_and_process_data"
+                tags=["data_cleaning"],  # kedro run --tags "data_cleaning"
             ),
             node(
                 func=engineer_and_prepare,
                 inputs="df_cleaned",
                 outputs="df_prep",
-                name="engineer_features_for_modeling",
-                tags=["feature_engineering"]
+                name="engineer_features",
+                tags=["feature_engineering"],
             ),
             node(
                 func=split_data,
                 inputs=["df_prep", "params:data_split_options"],
                 outputs=["X_train", "X_test", "y_train", "y_test"],
                 name="split_data_node",
+                tags=["data_splitting"],
             ),
             node(
                 func=preprocess_data,
@@ -42,6 +43,8 @@ def create_pipeline(**kwargs) -> Pipeline:
                     "preprocessor",
                     "processed_features"
                 ],
+                name="preprocessing_data",
+                tags=["data_preprocessing"],
             )
         ],
     )

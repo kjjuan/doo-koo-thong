@@ -16,10 +16,11 @@ def create_pipeline(**kwargs) -> Pipeline:
                     "X_train",
                     "y_train",
                     "preprocessor",
-                    "params:model_hyperparameters"
+                    "parameters"
                 ],
                 outputs="trained_models",
-                name="train_models_node"
+                name="train_models_node",
+                tags=["model_training"],
             ),
             node(
                 func=evaluate_models,
@@ -30,7 +31,8 @@ def create_pipeline(**kwargs) -> Pipeline:
                     "params:evaluation_thresholds"
                 ],
                 outputs="model_evaluation_metrics",
-                name="evaluate_models_node"
+                name="evaluate_models_node",
+                tags=["model_evaluation"],
             )
         ],
     )
