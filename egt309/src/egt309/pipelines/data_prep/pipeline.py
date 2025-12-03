@@ -44,5 +44,4 @@ def create_pipeline(**kwargs) -> Pipeline:
                 ],
             )
         ],
-        tags="data_prep"
     )
