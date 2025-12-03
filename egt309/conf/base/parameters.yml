@@ -12,6 +12,7 @@ features:
     - Credit Default
     - Personal Loan
     - Contact Method
+    - Housing Loan
   numeric:
     - Age
     - Campaign Calls
@@ -32,11 +33,11 @@ model_hyperparameters:
     n_estimators: 300
     max_depth: 3
   xgboost:
-    n_estimators: 500
-    learning_rate: 0.03
-    max_depth: 5
-    subsample: 0.8
-    colsample_bytree: 0.8
+    n_estimators: 600
+    learning_rate: 0.04
+    max_depth: 4
+    subsample: 0.9
+    colsample_bytree: 0.9
     eval_metric: logloss
 
-evaluation_thresholds: [0.7, 0.5, 0.3, 0.1]
+evaluation_thresholds: [0.28, 0.32, 0.35]

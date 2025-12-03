@@ -22,44 +22,47 @@ def train_models(X_train: pd.DataFrame, y_train: pd.Series, preprocessor: Column
     y_train = y_train.iloc[:, 0] # Convert back to Series for SMOTE
     
     models = {
-        "LogReg (SMOTE + balanced)": ImbPipeline(steps=[
+        "LogReg": ImbPipeline(steps=[
             ('preprocess', preprocessor),
-            ('smote', SMOTE(random_state=42)),
-            ('model', LogisticRegression(max_iter=params['logreg']['max_iter'],
-                                         class_weight=params['logreg']['class_weight'],
-                                         random_state=42))
+            ('model', LogisticRegression(
+                max_iter=params['logreg']['max_iter'],
+                class_weight=params['logreg']['class_weight'],
+                random_state=42
+            ))
+        ]),
+        "RandomForest": ImbPipeline(steps=[
+            ('preprocess', preprocessor),
+            ('model', RandomForestClassifier(
+                n_estimators=params['random_forest']['n_estimators'],
+                max_depth=params['random_forest']['max_depth'],
+                min_samples_split=params['random_forest']['min_samples_split'],
+                class_weight=params['random_forest']['class_weight'],
+                random_state=42
+            ))
+        ]),
+        "GradientBoosting": ImbPipeline(steps=[
+            ('preprocess', preprocessor),
+            ('model', GradientBoostingClassifier(
+                learning_rate=params['gradient_boosting']['learning_rate'],
+                n_estimators=params['gradient_boosting']['n_estimators'],
+                max_depth=params['gradient_boosting']['max_depth'],
+                random_state=42
+            ))
         ]),
 
-        "RandomForest (SMOTE + balanced)": ImbPipeline(steps=[
+        "XGBoost": ImbPipeline(steps=[
             ('preprocess', preprocessor),
-            ('smote', SMOTE(random_state=42)),
-            ('model', RandomForestClassifier(n_estimators=params['random_forest']['n_estimators'],
-                                             max_depth=params['random_forest']['max_depth'],
-                                             min_samples_split=params['random_forest']['min_samples_split'],
-                                             class_weight=params['random_forest']['class_weight'],
-                                             random_state=42))
-        ]),
-
-        "GradientBoosting (SMOTE)": ImbPipeline(steps=[
-            ('preprocess', preprocessor),
-            ('smote', SMOTE(random_state=42)),
-            ('model', GradientBoostingClassifier(learning_rate=params['gradient_boosting']['learning_rate'],
-                                                 n_estimators=params['gradient_boosting']['n_estimators'],
-                                                 max_depth=params['gradient_boosting']['max_depth'],
-                                                 random_state=42))
-        ]),
-
-        "XGBoost (SMOTE)": ImbPipeline(steps=[
-            ('preprocess', preprocessor),
-            ('smote', SMOTE(random_state=42)),
-            ('model', XGBClassifier(n_estimators=params['xgboost']['n_estimators'],
-                                    learning_rate=params['xgboost']['learning_rate'],
-                                    max_depth=params['xgboost']['max_depth'],
-                                    subsample=params['xgboost']['subsample'],
-                                    colsample_bytree=params['xgboost']['colsample_bytree'],
-                                    eval_metric=params['xgboost']['eval_metric'],
-                                    random_state=42))
+            ('model', XGBClassifier(
+                    n_estimators=params['xgboost']['n_estimators'],
+                    learning_rate=params['xgboost']['learning_rate'],
+                    max_depth=params['xgboost']['max_depth'],
+                    subsample=params['xgboost']['subsample'],
+                    colsample_bytree=params['xgboost']['colsample_bytree'],
+                    eval_metric=params['xgboost']['eval_metric'],
+                    random_state=42
+            ))
         ])
+
     }
     
     trained_models = {}
@@ -75,7 +78,9 @@ def evaluate_models(trained_models: dict, X_test: pd.DataFrame, y_test: pd.Serie
     Evaluates trained models across multiple probability thresholds and compiles results.
     """
     
-    y_test = y_test.iloc[:, 0] # Convert back to Series
+    if isinstance(y_test, pd.DataFrame):
+        y_test = y_test.iloc[:, 0]
+    # Convert back to Series
     all_results = []
     
     for thr in thresholds:

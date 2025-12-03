@@ -43,7 +43,7 @@ def engineer_and_prepare(df_cleaned: pd.DataFrame) -> pd.DataFrame:
     df_prep = df_cleaned.copy()
     
     # Drop client ID and Housing Loan
-    df_prep = df_prep.drop(columns=['Client ID', 'Housing Loan'])
+    df_prep = df_prep.drop(columns=['Client ID'])
     
     # Convert target to numeric (yes: 1, no: 0)
     df_prep['Subscription Status'] = df_prep['Subscription Status'].map({'yes': 1, 'no': 0})
