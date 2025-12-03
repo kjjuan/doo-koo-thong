@@ -1,4 +1,11 @@
 [
+  "Age Group_18-25",
+  "Age Group_26-35",
+  "Age Group_36-45",
+  "Age Group_46-55",
+  "Age Group_56-65",
+  "Age Group_66+",
+  "Age Group_nan",
   "Occupation_admin.",
   "Occupation_blue-collar",
   "Occupation_entrepreneur",
@@ -34,7 +41,6 @@
   "Housing Loan_no",
   "Housing Loan_unknown",
   "Housing Loan_yes",
-  "Age",
   "Campaign Calls",
   "PreviouslyContacted",
   "WasContactedBefore"

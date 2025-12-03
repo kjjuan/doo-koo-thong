@@ -6,6 +6,7 @@ data_split_options:
 
 features:
   categorical:
+    - Age Group          
     - Occupation
     - Marital Status
     - Education Level
@@ -14,10 +15,10 @@ features:
     - Contact Method
     - Housing Loan
   numeric:
-    - Age
-    - Campaign Calls
+    - Campaign Calls     
     - PreviouslyContacted
     - WasContactedBefore
+
 
 model_hyperparameters:
   logreg:

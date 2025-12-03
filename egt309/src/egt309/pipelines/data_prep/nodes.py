@@ -42,20 +42,29 @@ def engineer_and_prepare(df_cleaned: pd.DataFrame) -> pd.DataFrame:
 
     df_prep = df_cleaned.copy()
     
-    # Drop client ID and Housing Loan
+    # Drop client ID
     df_prep = df_prep.drop(columns=['Client ID'])
     
     # Convert target to numeric (yes: 1, no: 0)
     df_prep['Subscription Status'] = df_prep['Subscription Status'].map({'yes': 1, 'no': 0})
+
+    # Create Age Group (categorical) from Age
+    bins = [18, 25, 35, 45, 55, 65, 90]
+    labels = ['18-25', '26-35', '36-45', '46-55', '56-65', '66+']
+    df_prep['Age Group'] = pd.cut(
+        df_prep['Age'],
+        bins=bins,
+        labels=labels,
+        include_lowest=True,   # include 18 in first bin
+        right=True             # upper bound inclusive
+    )
+
+    # Drop original numeric Age column (since we’re using Age Group instead)
+    df_prep = df_prep.drop(columns=['Age'])
     
     # Feature engineering for 'Previous Contact Days'
-    # WasContactedBefore: 1 if contacted (Previous Contact Days != 999), 0 otherwise
     df_prep['WasContactedBefore'] = (df_prep['Previous Contact Days'] != 999).astype(int)
-    
-    # PreviouslyContacted: Set 999 (never contacted) to 0, leaving other values as days
     df_prep['PreviouslyContacted'] = df_prep['Previous Contact Days'].replace({999: 0})
-    
-    # Drop the original 'Previous Contact Days' column
     df_prep = df_prep.drop(columns=['Previous Contact Days'])
 
     return df_prep
