@@ -10,15 +10,15 @@ def register_pipelines() -> dict[str, Pipeline]:
         A mapping from pipeline names to `Pipeline` objects.
     """
     
-    # 1. Define the Pipeline Objects
+    # Define the Pipeline Objects
     data_prep_pipeline = dp.create_pipeline()
     data_science_pipeline = ds.create_pipeline()
 
     return {
-        # 2. Register the Default Pipeline (runs everything)
+        # egister the Default Pipeline (runs everything)
         "__default__": data_prep_pipeline + data_science_pipeline, 
         
-        # 3. Register the Individual Pipelines for targeted runs
+        # Register the Individual Pipelines for targeted runs
         "data_prep": data_prep_pipeline,
         "data_science": data_science_pipeline
     }
