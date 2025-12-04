@@ -8,9 +8,6 @@ from kedro.pipeline import Pipeline, node
 from .nodes import *
 
 def create_pipeline(**kwargs) -> Pipeline:
-    """
-    Creates the data cleaning and preparation pipeline.
-    """
     return Pipeline(
         [
             node(
