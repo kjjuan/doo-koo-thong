@@ -3,8 +3,25 @@ This is a boilerplate pipeline 'reporting'
 generated using Kedro 1.0.0
 """
 
-from kedro.pipeline import Node, Pipeline  # noqa
+from kedro.pipeline import node, pipeline  
+from .nodes import *
 
-
-def create_pipeline(**kwargs) -> Pipeline:
-    return Pipeline([])
+def create_pipeline(**kwargs) -> pipeline:
+    return pipeline(
+        [
+            # your existing evaluation node 
+            node(
+                func=evaluate_models,
+                inputs=["trained_models", "X_test", "y_test", "params:thresholds"],
+                outputs="evaluation_results",
+                name="evaluate_models_node",
+            ),
+            # ... ADD THIS NEW NODE ...
+            node(
+                func=plot_confusion_matrices,
+                inputs=["evaluation_results"], # Takes the DF from the previous node
+                outputs=None, # Returns nothing, just saves files as side effect
+                name="plot_confusion_matrices_node",
+            ),
+        ]
+    )

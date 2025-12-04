@@ -60,7 +60,8 @@ trained_models:
   filepath: "data/06_models/trained_models.pkl"
   type: pickle.PickleDataset
 
-# MISSING: Final Evaluation Output
+# Final Evaluation Output
 model_evaluation_metrics:
   filepath: "data/08_reporting/model_evaluation_metrics.csv"
   type: pandas.CSVDataset
+
