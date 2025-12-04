@@ -47,7 +47,7 @@ X_test_processed:
   filepath: "data/05_model_input/X_test_processed.csv"
   type: pandas.CSVDataset
 
-# Model/Preprocessor Artifacts 
+# Preprocessor Artifacts 
 preprocessor:
   filepath: "data/06_models/preprocessor.pkl"
   type: pickle.PickleDataset
@@ -56,11 +56,12 @@ processed_features:
   filepath: "data/04_feature/processed_features.json"
   type: json.JSONDataset
 
+#Model Artifacts
 trained_models:
   filepath: "data/06_models/trained_models.pkl"
   type: pickle.PickleDataset
 
-# MISSING: Final Evaluation Output
+# Final Evaluation Output
 model_evaluation_metrics:
   filepath: "data/08_reporting/model_evaluation_metrics.csv"
   type: pandas.CSVDataset
