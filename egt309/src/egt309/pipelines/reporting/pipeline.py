@@ -4,7 +4,7 @@ generated using Kedro 1.0.0
 """
 
 from kedro.pipeline import node, pipeline  
-from .nodes import evaluate_models, plot_confusion_matrices 
+from .nodes import *
 
 def create_pipeline(**kwargs) -> pipeline:
     return pipeline(
