@@ -11,26 +11,26 @@ def create_pipeline(**kwargs) -> Pipeline:
     return Pipeline(
         [
             node(
-                func=train_models,
+                func=train_models,                 # node that trains all ML models
                 inputs=[
-                    "X_train",
-                    "y_train",
-                    "preprocessor",
-                    "parameters"
+                    "X_train",                     # training features (not yet encoded)
+                    "y_train",                     # training labels
+                    "preprocessor",                # fitted ColumnTransformer from data_prep
+                    "parameters"                   # full parameter dictionary (hyperparams + split options)
                 ],
-                outputs="trained_models",
+                outputs="trained_models",          # dictionary of trained model pipelines
                 name="train_models_node",
-                tags=["model_training"],
+                tags=["model_training"],           # can run this node by tag
             ),
             node(
-                func=evaluate_models,
+                func=evaluate_models,              # node that evaluates all models
                 inputs=[
-                    "trained_models",
-                    "X_test",
-                    "y_test",
-                    "params:evaluation_thresholds"
+                    "trained_models",              # dict of fitted models from previous node
+                    "X_test",                      # raw test features
+                    "y_test",                      # test labels
+                    "params:evaluation_thresholds" # list of thresholds from parameters.yml
                 ],
-                outputs="model_evaluation_metrics",
+                outputs="model_evaluation_metrics",# DataFrame of metrics for all models/thresholds
                 name="evaluate_models_node",
                 tags=["model_training"],
             )
