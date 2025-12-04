@@ -14,6 +14,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import os
 import numpy as np
+import ast
 
 def train_models(X_train: pd.DataFrame, y_train: pd.Series, preprocessor: ColumnTransformer, params: dict) -> dict:
     """
@@ -136,7 +137,8 @@ def plot_confusion_matrices(results_df: pd.DataFrame, output_dir: str = "data/08
     """
     # Ensure the output directory exists
     os.makedirs(output_dir, exist_ok=True)
-
+    
+    results_df['Confusion Matrix'] = results_df['Confusion Matrix'].apply(ast.literal_eval)
     # Iterate through each row in the evaluation results
     for index, row in results_df.iterrows():
         model_name = row['Model']
