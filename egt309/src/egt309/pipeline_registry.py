@@ -14,14 +14,14 @@ def register_pipelines() -> dict[str, Pipeline]:
     # Define the Pipeline Objects
     data_prep_pipeline = dp.create_pipeline()
     data_science_pipeline = ds.create_pipeline()
-    reporting_pipeline = rp.create_pipeline()
+    #reporting_pipeline = rp.create_pipeline()
 
     return {
         # egister the Default Pipeline (runs everything)
-        "__default__": data_prep_pipeline + data_science_pipeline + reporting_pipeline,
+        "__default__": data_prep_pipeline + data_science_pipeline,
         
         # Register the Individual Pipelines for targeted runs
         "data_prep": data_prep_pipeline,
         "data_science": data_science_pipeline,
-        "reporting": reporting_pipeline
+        #"reporting": reporting_pipeline
     }
