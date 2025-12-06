@@ -47,6 +47,7 @@ To adjust hyperparameters (e.g., model learning rates, train/test split ratios, 
 3. Edit parameters.yml or catalog.yml to change file paths or reporting directories.
 
 Kedro Pipeline Logical Flow:
+
 graph TD
     A[01_raw: bmarket.csv] -->|Ingest & Clean| B(Data Prep Pipeline)
     B -->|Cleaned & Feature Engineered| C[04_feature: Master Table]
