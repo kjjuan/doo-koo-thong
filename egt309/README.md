@@ -48,23 +48,41 @@ To adjust hyperparameters (e.g., model learning rates, train/test split ratios, 
 
 Kedro Pipeline Logical Flow:
 
-'''t
-    A[01_raw: bmarket.csv] -->|Ingest & Clean| B(Data Prep Pipeline)
-    B -->|Cleaned & Feature Engineered| C[04_feature: Master Table]
-    
-    subgraph "Data Science Pipeline"
-    C --> D{Train/Test Split}
-    D -->|Train Data| E[Train Models]
-    D -->|Test Data| F[Make Predictions]
-    end
-    
-    subgraph "Reporting Pipeline"
-    F --> G[Evaluate Metrics]
-    E --> H[Save Models to 06_models]
-    G --> I[Generate Confusion Matrices in 08_reporting]
-    end
-'''
+This pipeline is organized into three main stages. The flow is described below using a table (`Node_A -> Node_B`) to show dependency and data movement.
 
+| Source/Pipeline | Output/Action | Destination/Data Layer |
+| :--- | :--- | :--- |
+| **01_raw: bmarket.csv** | Ingest & Clean | **Data Prep Pipeline** |
+| **Data Prep Pipeline** | Cleaned & Feature Engineered Data | **04_feature: Master Table** |
+| **04_feature: Master Table** | Split Data (Train/Test) | **Data Science Pipeline** |
+| **Data Science Pipeline (Training)** | Train Models | **06_models (Trained Models)** |
+| **Data Science Pipeline (Inference)** | Make Predictions | **Reporting Pipeline** |
+| **Reporting Pipeline** | Evaluate Metrics | **08_reporting (Metrics CSVs)** |
+| **Reporting Pipeline** | Generate Plots (CM) | **08_reporting (CM PNGs)** |
+
+### Flow Mapping
+
+This section maps the overall flow using the `Node_A -> Node_B` notation, representing the sequence of execution and data dependencies.
+
+```t
+# Data Preparation
+raw_input_data -> data_prep_pipeline
+data_prep_pipeline -> master_feature_table
+
+# Data Science (Splitting & Training)
+master_feature_table -> train_test_split
+train_test_split -> train_models
+train_test_split -> make_predictions
+
+# Reporting
+train_models -> save_models_to_06_models
+make_predictions -> evaluate_metrics
+evaluate_metrics -> generate_confusion_matrices
+
+# Final Outputs (08_reporting is the sink)
+evaluate_metrics -> reporting_metrics_csv
+generate_confusion_matrices -> reporting_cm_plots
+```
 
 ### EDA Findings and choice of Models
 1. Target Imbalance
