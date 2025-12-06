@@ -1,10 +1,15 @@
+<<<<<<< HEAD
 # conf/base/parameters.yml
 
 #Configured to split training and test data to 80% and 20% respectively
+=======
+# options for how to split train / test data
+>>>>>>> 8583e0b312d2cfea10367e621b2598e26c4c9a0b
 data_split_options:
-  test_size: 0.2
-  random_state: 42
+  test_size: 0.2          # 20% of data used for testing
+  random_state: 42        # fixes randomness so results are repeatable
 
+<<<<<<< HEAD
 #All features used for model training
 features:
   categorical:
@@ -27,22 +32,47 @@ features:
 # a small learning rate (0.03), medium depth (5), and subsampling (0.8)
 # for both rows and features to further enhance generalization.
 # It uses 'logloss' as the evaluation metric.
+=======
+# which columns are treated as categorical vs numeric
+features:
+  categorical:
+    - Age Group          # binned age category
+    - Occupation         # job type
+    - Marital Status     # single / married / divorced / etc.
+    - Education Level    # highest education
+    - Credit Default     # has credit default: yes/no/unknown
+    - Personal Loan      # personal loan status
+    - Contact Method     # cellular / telephone
+    - Housing Loan       # housing loan status
+  numeric:
+    - Campaign Calls     # number of calls in current campaign
+    - PreviouslyContacted # days since previous contact (0 if never)
+    - WasContactedBefore # flag if contacted before (0/1)
+
+# hyperparameters for each ML model
+>>>>>>> 8583e0b312d2cfea10367e621b2598e26c4c9a0b
 model_hyperparameters:
 #'logreg' is the 1st model, the logistic regession model 
   logreg:
+<<<<<<< HEAD
     max_iter: 500
     class_weight: balanced
 #'random_forest' is the 2nd model with 
+=======
+    max_iter: 500            # maximum optimisation steps for convergence
+    class_weight: balanced   # gives more weight to minority class
+>>>>>>> 8583e0b312d2cfea10367e621b2598e26c4c9a0b
   random_forest:
-    n_estimators: 300
-    max_depth: 12
-    min_samples_split: 5
-    class_weight: balanced
+    n_estimators: 300        # number of trees in the forest
+    max_depth: 12            # maximum depth of each tree (controls overfitting)
+    min_samples_split: 5     # minimum samples needed to split a node
+    class_weight: balanced   # balance yes/no classes in training
   gradient_boosting:
-    learning_rate: 0.05
-    n_estimators: 300
-    max_depth: 3
+    learning_rate: 0.05      # step size for each boosting iteration
+    n_estimators: 300        # number of boosting stages (trees)
+    max_depth: 3             # shallow trees to reduce overfitting
   xgboost:
+<<<<<<< HEAD
     n_estimators: 500
     learning_rate: 0.03
     max_depth: 5
@@ -51,3 +81,17 @@ model_hyperparameters:
     eval_metric: logloss
 
 evaluation_thresholds: [0.7, 0.5, 0.3, 0.1]
+=======
+    n_estimators: 600        # number of boosted trees
+    learning_rate: 0.01      # smaller learning rate for smoother learning
+    max_depth: 5             # tree depth (model complexity)
+    subsample: 0.9           # uses 90% of rows per tree (prevents overfitting)
+    colsample_bytree: 0.9    # uses 90% of features per tree (prevents overfitting)
+    eval_metric: logloss     # loss function used during training
+    gamma: 1.5               # minimum loss reduction to make a split (prunes weak splits)
+    scale_pos_weight: 4      # up-weights positive class to handle imbalance
+    reg_lambda: 10           # L2 regularisation (shrinks large weights)
+
+# thresholds used to turn predicted probability into class yes/no
+evaluation_thresholds: [0.28, 0.32, 0.5]
+>>>>>>> 8583e0b312d2cfea10367e621b2598e26c4c9a0b
