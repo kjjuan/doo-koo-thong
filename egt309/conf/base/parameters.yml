@@ -1,29 +1,38 @@
 # conf/base/parameters.yml
 
+#Configured to split training and test data to 80% and 20% respectively
 data_split_options:
   test_size: 0.2
   random_state: 42
 
+#All features used for model training
 features:
   categorical:
-    - Age Group          
     - Occupation
     - Marital Status
     - Education Level
     - Credit Default
     - Personal Loan
     - Contact Method
-    - Housing Loan
   numeric:
-    - Campaign Calls     
+    - Age
+    - Campaign Calls
     - PreviouslyContacted
     - WasContactedBefore
 
-
+# Machine Learning model hyperparameters used for each model
+# 💡 'gradient_boosting' uses a cautious learning rate (0.05) over 300 boosting stages,
+# with shallow trees (max_depth=3) to prevent overfitting.
+# 💡 'xgboost' (Extreme Gradient Boosting) is highly optimized with 500 trees,
+# a small learning rate (0.03), medium depth (5), and subsampling (0.8)
+# for both rows and features to further enhance generalization.
+# It uses 'logloss' as the evaluation metric.
 model_hyperparameters:
+#'logreg' is the 1st model, the logistic regession model 
   logreg:
     max_iter: 500
     class_weight: balanced
+#'random_forest' is the 2nd model with 
   random_forest:
     n_estimators: 300
     max_depth: 12
@@ -34,14 +43,11 @@ model_hyperparameters:
     n_estimators: 300
     max_depth: 3
   xgboost:
-    n_estimators: 600
-    learning_rate: 0.01
+    n_estimators: 500
+    learning_rate: 0.03
     max_depth: 5
-    subsample: 0.9
-    colsample_bytree: 0.9
+    subsample: 0.8
+    colsample_bytree: 0.8
     eval_metric: logloss
-    gamma: 1.5
-    scale_pos_weight: 4
-    reg_lambda: 10
 
-evaluation_thresholds: [0.28, 0.32, 0.5]
+evaluation_thresholds: [0.7, 0.5, 0.3, 0.1]

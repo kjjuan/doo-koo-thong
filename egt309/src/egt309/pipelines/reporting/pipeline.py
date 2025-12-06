@@ -9,14 +9,14 @@ from .nodes import evaluate_models, plot_confusion_matrices
 def create_pipeline(**kwargs) -> pipeline:
     return pipeline(
         [
-            # your existing evaluation node 
+            # Node for model evaluation
             node(
                 func=evaluate_models,
                 inputs=["trained_models", "X_test", "y_test", "params:thresholds"],
                 outputs="evaluation_results",
                 name="evaluate_models_node",
             ),
-            # ... ADD THIS NEW NODE ...
+            # Evaluation of the models (Confusion Matrix)
             node(
                 func=plot_confusion_matrices,
                 inputs=["evaluation_results"], # Takes the DF from the previous node

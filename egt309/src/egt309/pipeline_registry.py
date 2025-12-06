@@ -15,7 +15,7 @@ def register_pipelines() -> dict[str, Pipeline]:
     data_science_pipeline = ds.create_pipeline()
 
     return {
-        # egister the Default Pipeline (runs everything)
+        # Register the Default Pipeline (runs everything)
         "__default__": data_prep_pipeline + data_science_pipeline, 
         
         # Register the Individual Pipelines for targeted runs
