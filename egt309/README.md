@@ -86,12 +86,19 @@ generate_confusion_matrices -> reporting_cm_plots
 
 ### EDA Findings and choice of Models
 1. Target Imbalance
-Finding: The dataset is highly imbalanced. Only 11.3% of clients subscribed to the term deposit, while 88.7% did not.
+
+The dataset is highly imbalanced. Only 11.3% of clients subscribed to the term deposit, while 88.7% did not.
+
 Models are evaluated using Confusion Matrices and F1-scores rather than just accuracy to ensure the minority class is detected.
 
 2. Demographics
-For Age, subscription rates are highest among the very young (16-25) and the elderly (66+). The middle-aged workforce has lower subscription rates. Hence for Feature Engineering, We engineered an Age Group feature to capture the non-linear relationship between age and subscription likelihood.
+
+For Age, subscription rates are highest among the very young (16-25) and the elderly (66+). The middle-aged workforce has lower subscription rates. 
+
+Hence for Feature Engineering, We engineered an Age Group feature to capture the non-linear relationship between age and subscription likelihood.
+
 For Jobs, Students and Retired individuals are the most likely to subscribe.
+
 For Education, Higher education levels correlate with higher subscription rates.
 
 ### Feature Processing Summary
