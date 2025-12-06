@@ -48,7 +48,7 @@ To adjust hyperparameters (e.g., model learning rates, train/test split ratios, 
 
 Kedro Pipeline Logical Flow:
 
-graph TD
+'''t
     A[01_raw: bmarket.csv] -->|Ingest & Clean| B(Data Prep Pipeline)
     B -->|Cleaned & Feature Engineered| C[04_feature: Master Table]
     
@@ -63,6 +63,8 @@ graph TD
     E --> H[Save Models to 06_models]
     G --> I[Generate Confusion Matrices in 08_reporting]
     end
+'''
+
 
 ### EDA Findings and choice of Models
 1. Target Imbalance
