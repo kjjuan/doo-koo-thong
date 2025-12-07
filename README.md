@@ -61,11 +61,11 @@ cd egt309
 
 Ensure you are in the project root and have dependencies installed, input ```pip install -r requirements.txt``` in the terminal. 
 
-To run the whole Kedro pipeline, run ```bash run.sh```, or to specify a pipeline to run, e.g. the 'data_science' pipeline, run ```bash run.sh data_science```
+To run the whole Kedro pipeline, run ```./run.sh```, or to specify a pipeline to run, e.g. the 'data_science' pipeline, run ```./run.sh data_science```
 
 ### Hyperparameters
 To adjust hyperparameters (e.g., model learning rates, train/test split ratios, or file paths),
-1. Navigate to ```conf/base/```.
+1. Navigate to ```conf/base/```
 2. Edit parameters.yml to change model settings (e.g., XGBoost depth, Random Forest estimators).
 3. Edit parameters.yml or catalog.yml to change file paths or reporting directories.
 
