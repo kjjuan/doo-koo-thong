@@ -1,8 +1,8 @@
 #Define the pipeline to run upon running run.sh
-PIPELINE_NAME = "${1:-__default__}"
+PIPELINE_NAME="${1:-__default__}"
 
 #For any extra arguements to run specific pipelines or nodes
-EXTRA_ARGS = "${@:2}"
+EXTRA_ARGS="${@:2}"
 
 #Running the command
 kedro run 
