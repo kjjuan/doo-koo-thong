@@ -1,10 +1,16 @@
 ### Folder Overview & Structure
 
 The project follows the standard Kedro structure, organized to separate configuration, data, and source code. 
+
 Contributors:
+
 Matthew Doo Zheng En: oodmatt@gmail.com
+
 Koo Jia Juan: koojiajuan123@gmail.com
+
 Thong Joon Lee: joonleethong@gmail.com
+
+
 
 ```t
 egt309/
@@ -57,7 +63,7 @@ To adjust hyperparameters (e.g., model learning rates, train/test split ratios, 
 
 This pipeline is organized into three main stages. The flow is described below using a flow chart to show dependency and data movement.
 
-<img src="https://github.com/doo-koo-thong/Logical_Flow.drawio.png" width="100" alt="Pipeline Flow Chart">
+<img src="https://github.com/doo-koo-thong/blob/main/Logical_Flow.drawio.png" width="100" alt="Pipeline Flow Chart">
 
 ### EDA Findings and choice of Models
 1. Target Imbalance
