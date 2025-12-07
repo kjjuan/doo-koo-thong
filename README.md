@@ -144,10 +144,11 @@ We performed many rounds of experimentation to improve the results. This include
 
 
 1. Threshold Testing
+
 We changed the prediction threshold across many values, from 0.1 up to 0.9. This helped us see how the model behaves when we try to increase recall or precision. Because the default 0.5 threshold is not always suitable for imbalanced data, this step was important.
 
 
-2. SMOTE vs. No SMOTE
+3. SMOTE vs. No SMOTE
 
 We trained the models multiple times with and without SMOTE.
 
