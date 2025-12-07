@@ -1,87 +1,63 @@
 ### Folder Overview & Structure
 
-The project follows the standard Kedro structure, organized to separate configuration, data, and source code.
+The project follows the standard Kedro structure, organized to separate configuration, data, and source code. 
+Contributors:
+Matthew Doo Zheng En: oodmatt@gmail.com
+Koo Jia Juan: koojiajuan123@gmail.com
+Thong Joon Lee: joonleethong@gmail.com
 
 ```t
 egt309/
-├── conf/                   # Configuration files
+├── conf/                       # Configuration files
 │   └── base/               
-│       ├── catalog.yml     # Registry of all data sources and sinks
-│       └── parameters.yml  # Global parameters
-├── data/                   # Data storage (Local only, Gitignored)
-│   ├── 01_raw              # Immutable source data (bmarket.csv)
-│   ├── 02_intermediate     # -
-│   ├── 03_primary          # Cleaned data (missing values filled, types corrected)
-│   ├── 04_feature          # Engineered features (One-Hot Encoded, Scaled)
-│   ├── 05_model_input      # Train/Test splits and Preprocessed model
-│   ├── 06_models           # Serialized models (.pkl)
-│   ├── 07_model_output     # -
-│   └── 08_reporting        # Confusion matrices and metric logs
-├── notebooks/              # Jupyter notebooks for experiments (eda.ipynb)
-├── src/                    # Source code
+│       ├── catalog.yml         # Registry of all data sources and sinks
+│       └── parameters.yml      # Global parameters
+├── data/                       # Data storage (Local only, Gitignored)
+│   ├── 01_raw                  # Immutable source data (bmarket.csv)
+│   ├── 02_intermediate         # -
+│   ├── 03_primary              # Cleaned data (missing values filled, types corrected)
+│   ├── 04_feature              # Engineered features (One-Hot Encoded, Scaled)
+│   ├── 05_model_input          # Train/Test splits and Preprocessed model
+│   ├── 06_models               # Serialized models (.pkl)
+│   ├── 07_model_output         # -
+│   └── 08_reporting            # Confusion matrices and metric logs
+├── notebooks/                  # Jupyter notebooks for experiments (eda.ipynb)
+|   ├── eda.ipynb
+|   └── eda.pdf
+├── src/                        # Source code
 │   └── egt309/
-│       └── pipelines/      # Modular pipeline logic
-│           ├── data_prep   # Cleaning and Feature Engineering
-│           ├── data_science# Model training and splitting
-│           └── reporting   # Evaluation visualizations
-├── run.sh                  # Helper script for easy execution
-└── requirements.txt        # Project dependencies
+│       └── pipelines/          # Modular pipeline logic
+│           ├── data_prep       # Cleaning and Feature Engineering
+│           ├── data_science    # Model training and splitting
+│           └── reporting       # Evaluation visualizations
+|       └── pipeline_registry.py# Register Project Pipelines
+├── run.sh                      # Helper script for easy execution
+├── .gitignore                  # Files to ignore when pushing updates to github
+└── requirements.txt            # Project dependencies
 ```
 
-### Prerequisites:
+### Prerequisites
 1. Python 3.8+
 2. Pip
 3. Docker 
 
-### Installation:
+### Installation
 
 Ensure you are in the project root and have dependencies installed, input ```pip install -r requirements.txt``` in the terminal. 
 
 To run the whole Kedro pipeline, run ```./run.sh```, or to specify a pipeline to run, e.g. the 'data_science' pipeline, run ```./run.sh data_science```
 
-### Hyperparameters:
+### Hyperparameters
 To adjust hyperparameters (e.g., model learning rates, train/test split ratios, or file paths),
-1. Navigate to conf/base/.
+1. Navigate to ```conf/base/.```
 2. Edit parameters_data_science.yml to change model settings (e.g., XGBoost depth, Random Forest estimators).
 3. Edit parameters.yml or catalog.yml to change file paths or reporting directories.
 
-Kedro Pipeline Logical Flow:
+### Kedro Pipeline Logical Flow
 
-This pipeline is organized into three main stages. The flow is described below using a table (`Node_A -> Node_B`) to show dependency and data movement.
+This pipeline is organized into three main stages. The flow is described below using a flow chart to show dependency and data movement.
 
-| Source/Pipeline | Output/Action | Destination/Data Layer |
-| :--- | :--- | :--- |
-| **01_raw: bmarket.csv** | Ingest & Clean | **Data Prep Pipeline** |
-| **Data Prep Pipeline** | Cleaned & Feature Engineered Data | **04_feature: Master Table** |
-| **04_feature: Master Table** | Split Data (Train/Test) | **Data Science Pipeline** |
-| **Data Science Pipeline (Training)** | Train Models | **06_models (Trained Models)** |
-| **Data Science Pipeline (Inference)** | Make Predictions | **Reporting Pipeline** |
-| **Reporting Pipeline** | Evaluate Metrics | **08_reporting (Metrics CSVs)** |
-| **Reporting Pipeline** | Generate Plots (CM) | **08_reporting (CM PNGs)** |
-
-### Flow Mapping
-
-This section maps the overall flow using the `Node_A -> Node_B` notation, representing the sequence of execution and data dependencies.
-
-```t
-# Data Preparation
-raw_input_data -> data_prep_pipeline
-data_prep_pipeline -> master_feature_table
-
-# Data Science (Splitting & Training)
-master_feature_table -> train_test_split
-train_test_split -> train_models
-train_test_split -> make_predictions
-
-# Reporting
-train_models -> save_models_to_06_models
-make_predictions -> evaluate_metrics
-evaluate_metrics -> generate_confusion_matrices
-
-# Final Outputs (08_reporting is the sink)
-evaluate_metrics -> reporting_metrics_csv
-generate_confusion_matrices -> reporting_cm_plots
-```
+<img src="https://github.com/doo-koo-thong/Logical_Flow.drawio.png" width="100" alt="Pipeline Flow Chart">
 
 ### EDA Findings and choice of Models
 1. Target Imbalance
