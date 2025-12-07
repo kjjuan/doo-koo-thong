@@ -145,3 +145,9 @@ After tuning all models, XGBoost had the best combination of recall, precision, 
 Random Forest performed well but did not surpass XGBoost.
 Gradient Boosting improved over the baseline but still lower than XGBoost.
 Logistic Regression remained the weakest but was important as our baseline.
+
+
+### References and Citation
+OpenAI. (2025). ChatGPT (version 5.1) [Large language model]. https://chat.openai.com/
+Google. (2025). Gemini (version 2.0) [Large language model]. https://gemini.google.com/
+
