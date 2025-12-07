@@ -22,26 +22,23 @@ features:
     - WasContactedBefore
 
 # Machine Learning model hyperparameters used for each model
-# 'gradient_boosting' uses a cautious learning rate (0.05) over 300 boosting stages, with shallow trees (max_depth=3) to prevent overfitting.
-# 'xgboost' (Extreme Gradient Boosting) is highly optimized with 500 trees,
-# a small learning rate (0.03), medium depth (5), and subsampling (0.8)
-# for both rows and features to further enhance generalization.
-# It uses 'logloss' as the evaluation metric.
 model_hyperparameters:
-#'logreg' is the 1st model, the logistic regession model 
+# logistic regession model 
   logreg:
     max_iter: 500
     class_weight: balanced
-#'random_forest' is the 2nd model with 
+# random forest model
   random_forest:
     n_estimators: 300        # number of trees in the forest
     max_depth: 12            # maximum depth of each tree (controls overfitting)
     min_samples_split: 5     # minimum samples needed to split a node
     class_weight: balanced   # balance yes/no classes in training
+# gradient boosting model
   gradient_boosting:
     learning_rate: 0.05      # step size for each boosting iteration
     n_estimators: 300        # number of boosting stages (trees)
     max_depth: 3             # shallow trees to reduce overfitting
+# xgboost model
   xgboost:
     n_estimators: 600        # number of boosted trees
     learning_rate: 0.01      # smaller learning rate for smoother learning

@@ -54,8 +54,8 @@ def engineer_and_prepare(df_cleaned: pd.DataFrame) -> pd.DataFrame:
     df_prep['Subscription Status'] = df_prep['Subscription Status'].map({'yes': 1, 'no': 0})  # encode target
 
     # Create Age Group (categorical) from Age
-    bins = [16, 25, 35, 45, 55, 65, 120]                     # age bin edges
-    labels = ['16-25', '26-35', '36-45', '46-55', '56-65', '66+']  # labels for each age group
+    bins = [1, 25, 35, 45, 55, 65, 120]                     # age bin edges
+    labels = ['1-25', '26-35', '36-45', '46-55', '56-65', '66+']  # labels for each age group
     df_prep['Age Group'] = pd.cut(
         df_prep['Age'],
         bins=bins,
