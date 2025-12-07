@@ -4,24 +4,21 @@
 # Link: https://docs.kedro.org/en/stable/data/data_catalog.html
 
 # bmarket.db was changed to csv
-# Note: The raw data node should include the minimal cleaning needed for the raw data.
 df_raw:
   filepath: data/01_raw/bmarket.csv
   type: pandas.CSVDataset
 
-# cleaned and feature-engineered dataframe
-# Output of the initial cleaning node
+# cleaned and feature-engineered data
 df_cleaned:
   filepath: data/03_primary/df_cleaned.csv
   type: pandas.CSVDataset
 
 # dataset used for splitting and initial processing
-# Output of the feature engineering node
 df_prep:
   filepath: "data/04_feature/df_prep.csv"
   type: pandas.CSVDataset
 
-# Unprocessed Split Data (Used as Input to ImbPipeline)
+# unprocessed split data (used as input to ImbPipeline)
 X_train:
   filepath: "data/04_feature/X_train.csv"
   type: pandas.CSVDataset
@@ -30,15 +27,15 @@ X_test:
   filepath: "data/04_feature/X_test.csv"
   type: pandas.CSVDataset
 
-y_train_unprocessed: # Renamed to fix duplicate key error
+y_train_unprocessed:
   filepath: "data/04_feature/y_train.csv"
   type: pandas.CSVDataset
 
-y_test_unprocessed: # Renamed to fix duplicate key error
+y_test_unprocessed: 
   filepath: "data/04_feature/y_test.csv"
   type: pandas.CSVDataset
 
-# Processed Split Data (Output of preprocessing node, used for inspection/debugging) 
+# processed split data (output of preprocessing node) 
 X_train_processed:
   filepath: "data/05_model_input/X_train_processed.csv"
   type: pandas.CSVDataset
@@ -47,7 +44,7 @@ X_test_processed:
   filepath: "data/05_model_input/X_test_processed.csv"
   type: pandas.CSVDataset
 
-# Model/Preprocessor Artifacts 
+# Column Transformer preprocessor
 preprocessor:
   filepath: "data/05_model_input/preprocessor.pkl"
   type: pickle.PickleDataset
@@ -56,6 +53,7 @@ processed_features:
   filepath: "data/04_feature/processed_features.json"
   type: json.JSONDataset
 
+# models
 trained_logreg_model:
   filepath: data/06_models/logreg_model.pkl
   type: pickle.PickleDataset
@@ -72,7 +70,7 @@ trained_xgb_model:
   filepath: data/06_models/xgboost_model.pkl
   type: pickle.PickleDataset
 
-# Final Evaluation Output
+# Evaluation Output
 model_evaluation_metrics:
   filepath: "data/08_reporting/model_evaluation_metrics.csv"
   type: pandas.CSVDataset
