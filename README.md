@@ -65,7 +65,7 @@ To run the whole Kedro pipeline, run ```bash run.sh```, or to specify a pipeline
 
 ### Hyperparameters
 To adjust hyperparameters (e.g., model learning rates, train/test split ratios, or file paths),
-1. Navigate to ```conf/base/```.
+1. Navigate to ```conf/base/```
 2. Edit parameters.yml to change model settings (e.g., XGBoost depth, Random Forest estimators).
 3. Edit parameters.yml or catalog.yml to change file paths or reporting directories.
 
@@ -106,42 +106,88 @@ The following table summarizes how specific features are processed within the pi
 | **Categorical Columns** | Models require numeric input. | Applied **One-Hot Encoding** to Occupation, Marital Status, and Education features. |
 
 ### Choice of Models
+
 We trained four different models to understand which type works best for predicting whether a client will subscribe. Each model was chosen for a specific reason based on what we saw from the EDA.
 
+
 1. Logistic Regression
+
 This was used as our baseline model. It is simple, easy to interpret, and good for showing basic trends. However, our data had many non-linear patterns, so this model could not capture all relationships. It helped us see how much improvement the more complex models could achieve.
+
 2. Random Forest
+
 Random Forest was chosen because it handles non-linear patterns well and works smoothly with one-hot encoded categorical features. It is also more stable and less likely to overfit than a single decision tree. It usually gives strong baseline performance, so we included it to compare against the boosted models.
+
 3. Gradient Boosting
+
 We included Gradient Boosting to capture more complex interactions than Random Forest. Because it builds trees one at a time and learns from previous mistakes, it can find patterns that simpler models miss. It generally performs well on structured datasets like ours and helped us understand the gains from boosted models.
+
 4. XGBoost
+
 This model was added because it is one of the best-performing boosting algorithms for tabular data. It has built-in ways to handle imbalanced data and provides many parameters to fine-tune performance. After testing, XGBoost gave the strongest overall results, especially when tuned properly.
+
 
 ### Model Evaluation and Tuning Process
 Because the dataset is highly imbalanced (only 11.3% subscribed), accuracy alone was not useful. Instead, we evaluated models using:
+
 - F1-score (balances precision and recall)
+
 - Precision (how many predicted “yes” were correct)
+
 - Recall (how many actual “yes” we detected)
+
 - Confusion matrices (to see where the model is making mistakes)
 
 These metrics helped us compare models more fairly.
+
 We performed many rounds of experimentation to improve the results. This included:
+
+
 1. Threshold Testing
+
 We changed the prediction threshold across many values, from 0.1 up to 0.9. This helped us see how the model behaves when we try to increase recall or precision. Because the default 0.5 threshold is not always suitable for imbalanced data, this step was important.
-2. SMOTE vs. No SMOTE
+
+
+3. SMOTE vs. No SMOTE
+
 We trained the models multiple times with and without SMOTE.
+
 - SMOTE helped increase recall for some models but sometimes reduced precision.
+
 - Tree models like Random Forest did not always benefit from oversampling.
+
 - XGBoost performed better using scale_pos_weight instead of SMOTE.
+
 This showed us that imbalance handling is not one-size-fits-all and needs testing.
+
+
 3. Hyperparameter Tuning
+
 We adjusted many parameters over many trials to improve performance. Examples include:
+
 - XGBoost: max_depth, n_estimators, learning rate, scale_pos_weight, min_child_weight
+
 - Random Forest: n_estimators, max_depth, min_samples_leaf, class_weight
+
 - Logistic Regression: C value, penalty type, class_weight
+
 We changed these parameters repeatedly until improvements became small. This tuning process took many iterations and helped us push the models to produce better F1-scores.
+
+
 4. Final Comparison
+
 After tuning all models, XGBoost had the best combination of recall, precision, and F1-score.
+
 Random Forest performed well but did not surpass XGBoost.
+
 Gradient Boosting improved over the baseline but still lower than XGBoost.
+
 Logistic Regression remained the weakest but was important as our baseline.
+
+
+### References and Citation
+
+OpenAI. (2025). ChatGPT (version 5.1) [Large language model]. https://chat.openai.com/
+
+Google. (2025). Gemini (version 2.0) [Large language model]. https://gemini.google.com/
+
