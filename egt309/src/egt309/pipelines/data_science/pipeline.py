@@ -42,12 +42,5 @@ def create_pipeline(**kwargs) -> Pipeline:
                 name="evaluate_models_node",
                 tags=["model_training"],
             ),
-            node(
-                func=plot_confusion_matrices,
-                inputs=["model_evaluation_metrics"], # Takes the DF from the previous node
-                outputs=None, # Returns nothing, just saves files as side effect
-                name="plot_confusion_matrices_node",
-            ),
-
         ],
     )
