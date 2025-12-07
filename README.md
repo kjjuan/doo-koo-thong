@@ -2,13 +2,16 @@
 
 The project follows the standard Kedro structure, organized to separate configuration, data, and source code. 
 
-Contributors:
+Contributors + Contributions:
 
 Matthew Doo Zheng En: oodmatt@gmail.com
+- Data Understanding, EDA, Data Analysis, Docker, Bash File
 
 Koo Jia Juan: koojiajuan123@gmail.com
+- Data Understanding, Data Cleaning, Data Preparation, Model Fine-Tuning, Kedro
 
 Thong Joon Lee: joonleethong@gmail.com
+- Data Understanding, Data Analysis, Data Preparation, ML reasearch, ML Model Selection, Model Training, Data & Results Analysis/Overview, Model Fine-Tuning
 
 
 ```t
