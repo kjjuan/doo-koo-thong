@@ -9,7 +9,6 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 from xgboost import XGBClassifier
 from sklearn.compose import ColumnTransformer
-import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import os

@@ -49,7 +49,7 @@ X_test_processed:
 
 # Model/Preprocessor Artifacts 
 preprocessor:
-  filepath: "data/06_models/preprocessor.pkl"
+  filepath: "data/05_models/preprocessor.pkl"
   type: pickle.PickleDataset
 
 processed_features:
