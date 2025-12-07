@@ -9,11 +9,6 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 from xgboost import XGBClassifier
 from sklearn.compose import ColumnTransformer
-import matplotlib.pyplot as plt
-import seaborn as sns
-import os
-import numpy as np
-import ast
 
 def train_models(X_train: pd.DataFrame, y_train: pd.Series, preprocessor: ColumnTransformer, params: dict) -> dict:
     """

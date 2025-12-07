@@ -60,7 +60,7 @@ def engineer_and_prepare(df_cleaned: pd.DataFrame) -> pd.DataFrame:
         df_prep['Age'],
         bins=bins,
         labels=labels,
-        include_lowest=True,   # include 16 in first bin
+        include_lowest=True,   # include 1 in first bin
         right=True             # upper bound inclusive
     )
 
