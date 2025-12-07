@@ -7,16 +7,15 @@ egt309/
 ├── conf/                   # Configuration files
 │   └── base/               
 │       ├── catalog.yml     # Registry of all data sources and sinks
-│       ├── parameters.yml  # Global parameters
-│       └── parameters_*.yml# Pipeline-specific parameters (data_science, reporting, etc.)
+│       └── parameters.yml  # Global parameters
 ├── data/                   # Data storage (Local only, Gitignored)
 │   ├── 01_raw              # Immutable source data (bmarket.csv)
-│   ├── 02_intermediate     # Cleaned data (missing values filled, types corrected)
-│   ├── 03_primary          # Domain-specific data
+│   ├── 02_intermediate     # -
+│   ├── 03_primary          # Cleaned data (missing values filled, types corrected)
 │   ├── 04_feature          # Engineered features (One-Hot Encoded, Scaled)
-│   ├── 05_model_input      # Train/Test splits
+│   ├── 05_model_input      # Train/Test splits and Preprocessed model
 │   ├── 06_models           # Serialized models (.pkl)
-│   ├── 07_model_output     # Predictions
+│   ├── 07_model_output     # -
 │   └── 08_reporting        # Confusion matrices and metric logs
 ├── notebooks/              # Jupyter notebooks for experiments (eda.ipynb)
 ├── src/                    # Source code
