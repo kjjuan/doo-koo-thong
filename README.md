@@ -48,6 +48,17 @@ egt309/
 
 ### Installation
 
+If you have a windows system, you will need wsl or ubuntu to input these commands, otherwise if you have a macos or linux system, ignore the commands below:
+
+```git clone 
+
+python3 -m venv venv
+
+source venv/bin/activate
+
+cd egt309
+ ```
+
 Ensure you are in the project root and have dependencies installed, input ```pip install -r requirements.txt``` in the terminal. 
 
 To run the whole Kedro pipeline, run ```./run.sh```, or to specify a pipeline to run, e.g. the 'data_science' pipeline, run ```./run.sh data_science```
