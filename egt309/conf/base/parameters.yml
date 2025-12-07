@@ -14,8 +14,9 @@ features:
     - Credit Default
     - Personal Loan
     - Contact Method
+    - Age Group
+
   numeric:
-    - Age
     - Campaign Calls
     - PreviouslyContacted
     - WasContactedBefore

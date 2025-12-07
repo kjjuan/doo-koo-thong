@@ -18,14 +18,22 @@ def create_pipeline(**kwargs) -> Pipeline:
                     "preprocessor",                # fitted ColumnTransformer from data_prep
                     "parameters"                   # full parameter dictionary (hyperparams + split options)
                 ],
-                outputs="trained_models",          # dictionary of trained model pipelines
+                outputs={
+                    "LogReg": "trained_logreg_model",           # LogReg key saves to this catalog entry
+                    "RandomForest": "trained_rf_model",         # RandomForest key saves to this catalog entry
+                    "GradientBoosting": "trained_gb_model",
+                    "XGBoost": "trained_xgb_model",
+                },          # dictionary of trained model pipelines
                 name="train_models_node",
                 tags=["model_training"],           # can run this node by tag
             ),
             node(
                 func=evaluate_models,              # node that evaluates all models
                 inputs=[
-                    "trained_models",              # dict of fitted models from previous node
+                    "trained_logreg_model",      
+                    "trained_rf_model",         
+                    "trained_gb_model",          
+                    "trained_xgb_model",            
                     "X_test",                      # raw test features
                     "y_test",                      # test labels
                     "params:evaluation_thresholds" # list of thresholds from parameters.yml

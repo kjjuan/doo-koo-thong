@@ -49,15 +49,27 @@ X_test_processed:
 
 # Model/Preprocessor Artifacts 
 preprocessor:
-  filepath: "data/05_models/preprocessor.pkl"
+  filepath: "data/05_model_input/preprocessor.pkl"
   type: pickle.PickleDataset
 
 processed_features:
   filepath: "data/04_feature/processed_features.json"
   type: json.JSONDataset
 
-trained_models:
-  filepath: "data/06_models/trained_models.pkl"
+trained_logreg_model:
+  filepath: data/06_models/logreg_model.pkl
+  type: pickle.PickleDataset
+
+trained_rf_model:
+  filepath: data/06_models/random_forest_model.pkl
+  type: pickle.PickleDataset
+
+trained_gb_model:
+  filepath: data/06_models/gradient_boosting_model.pkl
+  type: pickle.PickleDataset
+
+trained_xgb_model:
+  filepath: data/06_models/xgboost_model.pkl
   type: pickle.PickleDataset
 
 # Final Evaluation Output

@@ -83,10 +83,16 @@ def train_models(X_train: pd.DataFrame, y_train: pd.Series, preprocessor: Column
     return trained_models
 
 
-def evaluate_models(trained_models: dict, X_test: pd.DataFrame, y_test: pd.Series, thresholds: list) -> pd.DataFrame:
+def evaluate_models(logreg_model: ImbPipeline, rf_model: ImbPipeline, gb_model: ImbPipeline, xgb_model: ImbPipeline, X_test: pd.DataFrame, y_test: pd.Series, thresholds: list) -> pd.DataFrame:
     """
     Evaluates trained models across multiple probability thresholds and compiles results.
     """
+    trained_models = {
+        "LogReg": logreg_model,
+        "RandomForest": rf_model,
+        "GradientBoosting": gb_model,
+        "XGBoost": xgb_model,
+    }
     
     if isinstance(y_test, pd.DataFrame):
         y_test = y_test.iloc[:, 0]
