@@ -10,6 +10,7 @@ from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 from xgboost import XGBClassifier
 from sklearn.compose import ColumnTransformer
 
+# done by jia juan and joonlee
 def train_models(X_train: pd.DataFrame, y_train: pd.Series, preprocessor: ColumnTransformer, params: dict) -> dict:
     """
     Trains multiple models using an ImbPipeline that includes SMOTE and the preprocessor.
@@ -77,7 +78,7 @@ def train_models(X_train: pd.DataFrame, y_train: pd.Series, preprocessor: Column
         
     return trained_models
 
-
+# done by joonlee
 def evaluate_models(logreg_model: ImbPipeline, rf_model: ImbPipeline, gb_model: ImbPipeline, xgb_model: ImbPipeline, X_test: pd.DataFrame, y_test: pd.Series, thresholds: list) -> pd.DataFrame:
     """
     Evaluates trained models across multiple probability thresholds and compiles results.

@@ -1,5 +1,8 @@
 # conf/base/parameters.yml
 
+# done by jia juan and joonlee
+
+
 #Configured to split training and test data to 80% and 20% respectively
 data_split_options:
   test_size: 0.2          # 20% of data used for testing

@@ -8,6 +8,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import OneHotEncoder
 
+# done by jia juan
 def clean_and_process(df_raw: pd.DataFrame) -> pd.DataFrame:
     df_cleaned = df_raw.copy()  # work on a copy so original raw data is unchanged
 
@@ -43,6 +44,7 @@ def clean_and_process(df_raw: pd.DataFrame) -> pd.DataFrame:
 
     return df_cleaned
 
+# done by jiajuan
 def engineer_and_prepare(df_cleaned: pd.DataFrame) -> pd.DataFrame:
 
     df_prep = df_cleaned.copy()  # copy cleaned data for feature engineering
@@ -70,6 +72,7 @@ def engineer_and_prepare(df_cleaned: pd.DataFrame) -> pd.DataFrame:
 
     return df_prep
 
+# done by joonlee
 def split_data(df_prep: pd.DataFrame, data_split_options: dict) -> tuple[pd.DataFrame, pd.DataFrame, pd.Series, pd.Series]:
     """
     Splits data into features (X) and target (y), then performs a train-test split.
@@ -91,6 +94,7 @@ def split_data(df_prep: pd.DataFrame, data_split_options: dict) -> tuple[pd.Data
     return X_train, X_test, y_train, y_test
 
 
+# done by joonlee
 def preprocess_data(X_train: pd.DataFrame, X_test: pd.DataFrame, features: dict) -> tuple:
     """
     Applies One-Hot Encoding and fits the ColumnTransformer.
